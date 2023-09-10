@@ -1,0 +1,49 @@
+---
+title: "Data Analysis Assignment"
+author: "Pardeepan"
+date: "2023-09-10"
+output: html_document
+---
+
+# Introduction
+
+This is my data analysis assignment, where I will analyze the "Car_sales.csv" dataset using R.
+
+## Dataset
+
+I have loaded the dataset into a variable named 'df' for a data frame.
+
+```{r}
+# Load the dataset into a variable (e.g., df for a data frame)
+df <- read.csv("Car_sales.csv")
+
+# Descriptive statistics for quantitative variables
+summary(df$Engine_size)
+summary(df$Horsepower)
+summary(df$Fuel_efficiency)
+summary(df$Price_in_thousands)
+
+# Descriptive statistics for categorical variables
+table(df$Manufacturer)
+table(df$Vehicle_type)
+table(df$Engine_size)
+
+# Logarithmic transformation
+df$log_Price_in_thousands <- log(df$Price_in_thousands)
+
+# Descriptive statistics for the transformed variable
+summary(df$log_Price_in_thousands)
+
+```{r}
+# Load the ggplot2 library if not already loaded
+library(ggplot2)
+
+# Histogram for 'Price_in_thousands' variable
+ggplot(df, aes(x = Price_in_thousands)) +
+  geom_histogram(binwidth = 5, fill = "blue", color = "black") +
+  labs(title = "Distribution of Price_in_thousands", x = "Price_in_thousands", y = "Frequency")
+
+# Scatterplot between 'Price_in_thousands' and 'Model'
+ggplot(df, aes(x = Price_in_thousands, y = Model)) +
+  geom_point() +
+  labs(title = "Scatterplot: Price_in_thousands vs. Model", x = "Price_in_thousands", y = "Model")
